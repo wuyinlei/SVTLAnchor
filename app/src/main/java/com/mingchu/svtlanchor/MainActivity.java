@@ -8,6 +8,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout ll_5;
     private LinearLayout ll_6;
     private LinearLayout ll_7;
+
+    private FlyBanner mFlyBanner;
+
+    private String[] bannerImages = {"http://image.xinliji.me/o_1bep35vtl1q5m1ucb1ghcftfh2n.png"
+    ,"http://image.xinliji.me/o_1bb34rj3bdg35g11ia91fuo1v4ti.png",
+            "http://image.xinliji.me/o_1b2up2c5p1mmvvr3b7o1sp91lb8i.png",
+            "http://image.xinliji.me/o_1b2vq62nu1gqbp125g1slo1fgqn.png"
+    };
 
     // 头部导航标签
     private String[] navigationTag = {"试用反馈", "产品介绍", "品鉴规则", "推荐菜谱", "品鉴申请", "试用者名单", "全部评论"};
@@ -48,7 +59,25 @@ public class MainActivity extends AppCompatActivity {
         initializeView();
         refreshView();
         initListener();
+        initData();
     }
+
+    private void initData() {
+
+        List<String> mImages = new ArrayList<>();
+        for (String image : bannerImages) {
+            mImages.add(image);
+        }
+
+        mFlyBanner.setImagesUrl(mImages);
+
+
+
+
+
+
+    }
+
 
     public void initializeView() {
         tab_tagContainer = (TabLayout) findViewById(R.id.anchor_tagContainer);
@@ -62,17 +91,11 @@ public class MainActivity extends AppCompatActivity {
         ll_6 = (LinearLayout) findViewById(R.id.ll_6);
         ll_7 = (LinearLayout) findViewById(R.id.ll_7);
 
+        mFlyBanner = (FlyBanner) findViewById(R.id.fly_banner);
+
     }
 
     public void refreshView() {
-//        tv_1.setText(navigationTag[1]);
-//        tv_2.setText(navigationTag[2]);
-//        tv_3.setText(navigationTag[3]);
-//        tv_4.setText(navigationTag[4]);
-//        tv_5.setText(navigationTag[5]);
-//        tv_6.setText(navigationTag[6]);
-//        tv_7.setText(navigationTag[7]);
-
         // 添加页内导航标签
         for (String item : navigationTag) {
             tab_tagContainer.addTab(tab_tagContainer.newTab().setText(item));
@@ -112,30 +135,30 @@ public class MainActivity extends AppCompatActivity {
                 // 计算点击的导航标签所对应内容区域的高度
                 int targetY = 0;
                 switch (position) {
+
                     case 0:
-                        break;
-                    case 1:
                         targetY = ll_1.getTop();
                         break;
-                    case 2:
+                    case 1:
                         targetY = ll_2.getTop();
                         break;
-                    case 3:
+                    case 2:
                         targetY = ll_3.getTop();
                         break;
-                    case 4:
+                    case 3:
                         targetY = ll_4.getTop();
                         break;
-
-                    case 5:
+                    case 4:
                         targetY = ll_5.getTop();
                         break;
-                    case 6:
+                    case 5:
                         targetY = ll_6.getTop();
                         break;
-                    case 7:
+                    case 6:
                         targetY = ll_7.getTop();
                         break;
+
+
                     default:
                         break;
                 }

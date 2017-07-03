@@ -26,14 +26,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/iv_photo"
+                <com.mingchu.svtlanchor.FlyBanner
+                    android:id="@+id/fly_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="#33eeff"/>
+                    android:layout_height="280dp"/>
 
                 <RelativeLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp">
@@ -127,6 +125,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 app:contentInsetLeft="0dp"
@@ -226,7 +225,7 @@
                     android:id="@+id/recycler_one"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -256,7 +255,7 @@
                     android:id="@+id/recycler_two"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -286,7 +285,7 @@
                     android:id="@+id/recycler_three"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -316,7 +315,7 @@
                     android:id="@+id/recycler_four"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -346,7 +345,7 @@
                     android:id="@+id/recycler_five"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -376,7 +375,7 @@
                     android:id="@+id/recycler_six"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
@@ -406,7 +405,7 @@
                     android:id="@+id/recycler_seven"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="1000dp"/>
 
             </LinearLayout>
 
