@@ -3,16 +3,15 @@ package com.mingchu.svtlanchor;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * @author shiguotao
+ * @author admin
  *         <p>
  *         滑动监听的ScrollView
  */
-public class ScrollChangedScrollView extends NestedScrollView {
+public class ScrollChangedScrollView extends MyNetScrollview {
 
     private ScrollViewListener scrollViewListener = null;
     private int handlerWhatId = 65984;
@@ -65,7 +64,8 @@ public class ScrollChangedScrollView extends NestedScrollView {
     interface ScrollViewListener {
         /**
          * 滑动监听
-         *  @param scrollView ScrollView控件
+         *
+         * @param scrollView ScrollView控件
          * @param x          x轴坐标
          * @param y          y轴坐标
          * @param oldx       上一个x轴坐标

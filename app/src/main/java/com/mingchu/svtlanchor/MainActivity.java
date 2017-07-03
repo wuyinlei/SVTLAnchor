@@ -1,12 +1,19 @@
 package com.mingchu.svtlanchor;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +32,17 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout ll_6;
     private LinearLayout ll_7;
 
+    private RecyclerView mRvOne,mRvThree;
+
+    private WebView mWebView;
+
+    private MyAdapter mMyAdapter;
+
     private FlyBanner mFlyBanner;
 
+    private List<String> datas = new ArrayList<>();
+
+    //图片轮播资源
     private String[] bannerImages = {"http://image.xinliji.me/o_1bep35vtl1q5m1ucb1ghcftfh2n.png"
     ,"http://image.xinliji.me/o_1bb34rj3bdg35g11ia91fuo1v4ti.png",
             "http://image.xinliji.me/o_1b2up2c5p1mmvvr3b7o1sp91lb8i.png",
@@ -72,10 +88,6 @@ public class MainActivity extends AppCompatActivity {
         mFlyBanner.setImagesUrl(mImages);
 
 
-
-
-
-
     }
 
 
@@ -92,6 +104,44 @@ public class MainActivity extends AppCompatActivity {
         ll_7 = (LinearLayout) findViewById(R.id.ll_7);
 
         mFlyBanner = (FlyBanner) findViewById(R.id.fly_banner);
+        mWebView = (WebView) findViewById(R.id.web_view);
+
+        mRvOne = (RecyclerView) findViewById(R.id.recycler_one);
+        LinearLayoutManager layoutOne = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return true;
+            }
+        };
+
+        LinearLayoutManager layoutThree = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        mRvOne.setLayoutManager(layoutOne);
+        mMyAdapter = new MyAdapter();
+        mRvOne.setAdapter(mMyAdapter);
+
+        mRvThree = (RecyclerView) findViewById(R.id.recycler_three);
+        mRvThree.setLayoutManager(layoutThree);
+        mMyAdapter = new MyAdapter();
+        mRvThree.setAdapter(mMyAdapter);
+
+
+        WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setAppCacheEnabled(false);
+        mWebView.loadUrl("http://webapp.greatchef.com.cn/newsview?id=1994");
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
 
     }
 
@@ -181,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param scrollView 内容模块容器
      */
-    private void scrollRefreshNavigationTag(NestedScrollView scrollView) {
+    private void scrollRefreshNavigationTag(MyNetScrollview scrollView) {
         if (scrollView == null) {
             return;
         }
@@ -189,24 +239,24 @@ public class MainActivity extends AppCompatActivity {
         int scrollY = scrollView.getScrollY();
         // 确定ScrollView当前展示的顶部内容属于哪个内容模块
         if (scrollY > ll_7.getTop()) {
-            refreshContent2NavigationFlag(7);
-
-        } else if (scrollY > ll_6.getTop()) {
             refreshContent2NavigationFlag(6);
 
-        } else if (scrollY > ll_5.getTop()) {
+        } else if (scrollY > ll_6.getTop()) {
             refreshContent2NavigationFlag(5);
-        } else if (scrollY > ll_4.getTop()) {
-            refreshContent2NavigationFlag(4);
 
-        } else if (scrollY > ll_3.getTop()) {
+        } else if (scrollY > ll_5.getTop()) {
+            refreshContent2NavigationFlag(4);
+        } else if (scrollY > ll_4.getTop()) {
             refreshContent2NavigationFlag(3);
 
-        } else if (scrollY > ll_2.getTop()) {
+        } else if (scrollY > ll_3.getTop()) {
             refreshContent2NavigationFlag(2);
 
-        } else if (scrollY > ll_1.getTop()) {
+        } else if (scrollY > ll_2.getTop()) {
             refreshContent2NavigationFlag(1);
+
+        } else if (scrollY > ll_1.getTop()) {
+            refreshContent2NavigationFlag(0);
 
         } else {
             refreshContent2NavigationFlag(0);
@@ -232,5 +282,44 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         lastTagIndex = currentTagIndex;
+    }
+
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(MainActivity.this)
+                    .inflate(R.layout.item,parent,false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, final int position) {
+            holder.ll_recommend_one.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return bannerImages.length;
+        }
+
+
+        class ViewHolder extends RecyclerView.ViewHolder{
+
+            public LinearLayout ll_recommend_one;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                ll_recommend_one = (LinearLayout) itemView.findViewById(R.id.ll_recommend_one);
+            }
+        }
     }
 }
