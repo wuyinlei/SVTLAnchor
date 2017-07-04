@@ -1,5 +1,7 @@
 package com.mingchu.svtlanchor;
 
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout ll_6;
     private LinearLayout ll_7;
 
-    private RecyclerView mRvOne,mRvThree;
+    private AppBarLayout toolbar_layout;
+
+//    private XRecyclerView mRvOne;
+
+    private RecyclerView mRvThree;
 
     private WebView mWebView;
 
@@ -44,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     //图片轮播资源
     private String[] bannerImages = {"http://image.xinliji.me/o_1bep35vtl1q5m1ucb1ghcftfh2n.png"
-    ,"http://image.xinliji.me/o_1bb34rj3bdg35g11ia91fuo1v4ti.png",
+            , "http://image.xinliji.me/o_1bb34rj3bdg35g11ia91fuo1v4ti.png",
             "http://image.xinliji.me/o_1b2up2c5p1mmvvr3b7o1sp91lb8i.png",
             "http://image.xinliji.me/o_1b2vq62nu1gqbp125g1slo1fgqn.png"
     };
@@ -90,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    boolean isExpand = false;
 
     public void initializeView() {
         tab_tagContainer = (TabLayout) findViewById(R.id.anchor_tagContainer);
@@ -106,23 +115,28 @@ public class MainActivity extends AppCompatActivity {
         mFlyBanner = (FlyBanner) findViewById(R.id.fly_banner);
         mWebView = (WebView) findViewById(R.id.web_view);
 
-        mRvOne = (RecyclerView) findViewById(R.id.recycler_one);
-        LinearLayoutManager layoutOne = new LinearLayoutManager(this){
-            @Override
-            public boolean canScrollVertically() {
-                return true;
-            }
-        };
+        toolbar_layout = (AppBarLayout) findViewById(R.id.app_bar);
+//
+//        toolbar_layout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+//            @Override
+//            public void onStateChanged(AppBarLayout appBarLayout, State state, int position) {
+//
+//            }
+//        });
 
-        LinearLayoutManager layoutThree = new LinearLayoutManager(this){
+        LinearLayoutManager layoutThree = new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
-        mRvOne.setLayoutManager(layoutOne);
+
+
+//        mRvOne.setLayoutManager(layoutOne);
+
+
         mMyAdapter = new MyAdapter();
-        mRvOne.setAdapter(mMyAdapter);
+//        mRvOne.setAdapter(mMyAdapter);
 
         mRvThree = (RecyclerView) findViewById(R.id.recycler_three);
         mRvThree.setLayoutManager(layoutThree);
@@ -134,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setJavaScriptEnabled(true);
         settings.setAppCacheEnabled(false);
         mWebView.loadUrl("http://webapp.greatchef.com.cn/newsview?id=1994");
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -285,13 +299,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(MainActivity.this)
-                    .inflate(R.layout.item,parent,false);
+                    .inflate(R.layout.item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -311,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder {
 
             public LinearLayout ll_recommend_one;
 
