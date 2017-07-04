@@ -1,4 +1,4 @@
-package com.mingchu.svtlanchor;
+package com.mingchu.svtlanchor.common;
 
 import android.support.design.widget.AppBarLayout;
 import android.util.Log;

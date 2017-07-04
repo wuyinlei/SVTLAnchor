@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mingchu.svtlanchor.first.FirstActivity;
+import com.mingchu.svtlanchor.second.SecondActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

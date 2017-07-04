@@ -1,4 +1,4 @@
-package com.mingchu.svtlanchor;
+package com.mingchu.svtlanchor.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.mingchu.svtlanchor.R;
 
 import java.util.List;
 

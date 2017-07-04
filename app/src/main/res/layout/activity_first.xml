@@ -9,7 +9,6 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
-        app:layout_behavior="com.mingchu.svtlanchor.FlingBehavior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.mingchu.svtlanchor.FlyBanner
+                <com.mingchu.svtlanchor.common.FlyBanner
                     android:id="@+id/fly_banner"
                     android:layout_width="match_parent"
                     android:layout_height="280dp"/>
@@ -191,7 +190,7 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <com.mingchu.svtlanchor.ScrollChangedScrollView
+    <com.mingchu.svtlanchor.first.ScrollChangedScrollView
         android:id="@+id/anchor_bodyContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -427,6 +426,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </com.mingchu.svtlanchor.ScrollChangedScrollView>
+    </com.mingchu.svtlanchor.first.ScrollChangedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

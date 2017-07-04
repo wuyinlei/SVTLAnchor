@@ -1,4 +1,4 @@
-package com.mingchu.svtlanchor;
+package com.mingchu.svtlanchor.first;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -15,6 +15,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.mingchu.svtlanchor.common.FlyBanner;
+import com.mingchu.svtlanchor.R;
 
 import java.util.ArrayList;
 import java.util.List;
