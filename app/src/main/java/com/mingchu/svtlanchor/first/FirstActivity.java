@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.mingchu.svtlanchor.common.FlyBanner;
 import com.mingchu.svtlanchor.R;
+import com.mingchu.svtlanchor.tablayout.OnTabSelectListener;
+import com.mingchu.svtlanchor.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
 public class FirstActivity extends AppCompatActivity {
 
 
-    private TabLayout tab_tagContainer;
+    private SlidingTabLayout tab_tagContainer;
     private ScrollChangedScrollView sv_bodyContainer;
     private LinearLayout ll_1;
     private LinearLayout ll_2;
@@ -101,9 +103,10 @@ public class FirstActivity extends AppCompatActivity {
     boolean isExpand = false;
 
     public void initializeView() {
-        tab_tagContainer = (TabLayout) findViewById(R.id.anchor_tagContainer);
+        tab_tagContainer = (SlidingTabLayout) findViewById(R.id.anchor_tagContainer);
         sv_bodyContainer = (ScrollChangedScrollView) findViewById(R.id.anchor_bodyContainer);
 
+        tab_tagContainer.setViewPager(navigationTag);
         ll_1 = (LinearLayout) findViewById(R.id.ll_1);
         ll_2 = (LinearLayout) findViewById(R.id.ll_2);
         ll_3 = (LinearLayout) findViewById(R.id.ll_3);
@@ -116,13 +119,6 @@ public class FirstActivity extends AppCompatActivity {
         mWebView = (WebView) findViewById(R.id.web_view);
 
         toolbar_layout = (AppBarLayout) findViewById(R.id.app_bar);
-//
-//        toolbar_layout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-//            @Override
-//            public void onStateChanged(AppBarLayout appBarLayout, State state, int position) {
-//
-//            }
-//        });
 
         LinearLayoutManager layoutThree = new LinearLayoutManager(this) {
             @Override
@@ -162,7 +158,7 @@ public class FirstActivity extends AppCompatActivity {
     public void refreshView() {
         // 添加页内导航标签
         for (String item : navigationTag) {
-            tab_tagContainer.addTab(tab_tagContainer.newTab().setText(item));
+
         }
     }
 
@@ -189,14 +185,12 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
-        tab_tagContainer.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+        tab_tagContainer.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelect(int position) {
                 //表明当前的动作是由 TabLayout 触发和主导
                 tagFlag = false;
-                // 根据点击的位置，使ScrollView 滑动到对应区域
-                int position = tab.getPosition();
-                // 计算点击的导航标签所对应内容区域的高度
                 int targetY = 0;
                 switch (position) {
 
@@ -228,16 +222,66 @@ public class FirstActivity extends AppCompatActivity {
                 }
                 // 移动到对应的内容区域
                 sv_bodyContainer.smoothScrollTo(0, targetY + 5);
+                tab_tagContainer.setCurrentTab(position);
+
+
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselect(int position) {
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+//        tab_tagContainer.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                //表明当前的动作是由 TabLayout 触发和主导
+//                tagFlag = false;
+//                // 根据点击的位置，使ScrollView 滑动到对应区域
+//                int position = tab.getPosition();
+//                // 计算点击的导航标签所对应内容区域的高度
+//                int targetY = 0;
+//                switch (position) {
+//
+//                    case 0:
+//                        targetY = ll_1.getTop();
+//                        break;
+//                    case 1:
+//                        targetY = ll_2.getTop();
+//                        break;
+//                    case 2:
+//                        targetY = ll_3.getTop();
+//                        break;
+//                    case 3:
+//                        targetY = ll_4.getTop();
+//                        break;
+//                    case 4:
+//                        targetY = ll_5.getTop();
+//                        break;
+//                    case 5:
+//                        targetY = ll_6.getTop();
+//                        break;
+//                    case 6:
+//                        targetY = ll_7.getTop();
+//                        break;
+//
+//
+//                    default:
+//                        break;
+//                }
+//                // 移动到对应的内容区域
+//                sv_bodyContainer.smoothScrollTo(0, targetY + 5);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//            }
+//        });
     }
 
     /**
@@ -292,7 +336,9 @@ public class FirstActivity extends AppCompatActivity {
             content2NavigateFlagInnerLock = true;
             // 动作是由ScrollView触发主导的情况下，导航标签才可以滚动选中
             if (tagFlag) {
-                tab_tagContainer.setScrollPosition(currentTagIndex, 0, true);
+                tab_tagContainer.setCurrentTab(currentTagIndex);
+//                tab_tagContainer.setCurrentTab(currentTagIndex,true);
+//                tab_tagContainer.setScrollPosition(currentTagIndex, 0, true);
             }
         }
         lastTagIndex = currentTagIndex;

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
                                                  xmlns:tools="http://schemas.android.com/tools"
+                                                 xmlns:tl="http://schemas.android.com/apk/res-auto"
                                                  android:id="@+id/activity_tab_layout"
                                                  android:fitsSystemWindows="true"
+                                                 android:background="#ffffff"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
 
@@ -18,8 +19,8 @@
             android:layout_height="wrap_content"
             android:background="#f7f7f7"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            tl:contentScrim="?attr/colorPrimary"
+            tl:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
             <LinearLayout
@@ -129,11 +130,11 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                tl:contentInsetLeft="0dp"
+                tl:contentInsetStart="0dp"
+                tl:layout_collapseMode="pin"
+                tl:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                tl:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
                 <RelativeLayout
@@ -167,25 +168,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:orientation="horizontal">
 
-            <android.support.design.widget.TabLayout
+            <com.mingchu.svtlanchor.tablayout.SlidingTabLayout
                 android:id="@+id/anchor_tagContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ff88ff"
-                app:tabIndicatorColor="@color/colorAccent"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/colorPrimary"/>
+                android:layout_height="48dp"
+                android:background="#EEEEEE"
+                tl:tl_divider_padding="5dp"
+                tl:tl_indicator_color="@color/main_yellow"
+                tl:tl_indicator_height="2dp"
+                tl:tl_indicator_width_equal_title="true"
+                tl:tl_tab_padding="5dp"
+                tl:tl_tab_space_equal="false"
+                tl:tl_textSelectColor="#000000"
+                tl:tl_textUnselectColor="#66000000"
+               />
 
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -196,7 +199,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="always"
         android:background="#ffffff"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tl:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_below="@id/app_bar">
 
         <LinearLayout

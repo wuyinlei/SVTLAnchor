@@ -35,14 +35,16 @@
 
             <com.mingchu.svtlanchor.second.ScrollViewTabIndicator
                 android:id="@+id/tab2"
-                android:layout_width="match_parent"
+                android:layout_width="1200dp"
+
                 android:layout_height="40dp"
                 android:background="@android:color/white"
                 android:textAppearance="@style/style_tab_selector"
                 app:tpi_indicatorColor="#d30775"
                 app:tpi_indicatorHeight="3dp"
-                app:tpi_indicatorMode="wrap_content"
-                app:tpi_mode="fixed"
+                app:tpi_indicatorMode="match_parent"
+                app:tpi_mode="scroll"
+                app:tpi_tabPadding="10dp"
                 app:tpi_underLineColor="#00000000"/>
 
             <TextView
@@ -100,13 +102,14 @@
         android:layout_below="@+id/tv_title"
         android:visibility="invisible"
         android:id="@+id/tab"
-        android:layout_width="match_parent"
+        android:layout_width="1200dp"
         android:layout_height="40dp"
         android:background="@android:color/white"
         android:textAppearance="@style/style_tab_selector"
         app:tpi_indicatorColor="#d30775"
         app:tpi_indicatorHeight="3dp"
+        app:tpi_tabPadding="10dp"
         app:tpi_indicatorMode="match_parent"
-        app:tpi_mode="fixed"
+        app:tpi_mode="scroll"
         app:tpi_underLineColor="#00000000"/>
 </RelativeLayout>
